@@ -111,7 +111,7 @@ CREATE OR REPLACE FUNCTION fetch_opponent(_id INTEGER)
                 candidate.id, candidate.name, candidate.opponent_id
             FROM
                 candidate
-            WHERE opponent_id = $1;
+            WHERE candidate.opponent_id = $1;
     END;
 $$ LANGUAGE plpgsql;
 
