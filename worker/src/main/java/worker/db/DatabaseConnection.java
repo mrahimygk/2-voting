@@ -228,6 +228,7 @@ public class DatabaseConnection {
 
         st.executeUpdate();
         isTablesInitialized = true;
+        System.err.println("DEBUG ::: DATABASE STATEMENTS EXECUTED");
 
     }
 
