@@ -84,6 +84,7 @@ def hello():
     cursor = init_db();
     options = get_all_options(cursor)
     current_votes = get_all_votes(cursor, str(voter_id))
+    opponent = "0"
     if request.method == 'POST':
         redis = get_redis()
         vote = request.form['vote']
