@@ -89,12 +89,12 @@ public class DatabaseConnection {
         }
 
         isConnected = true;
-        if (!isTablesInitialized)
+        /*if (!isTablesInitialized)
             try {
                 initTables(databaseConnection);
             } catch (SQLException e) {
                 e.printStackTrace();
-            }
+            }*/
 
         System.err.println("Connected to db");
         return true;

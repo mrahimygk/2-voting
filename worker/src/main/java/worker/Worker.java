@@ -14,13 +14,17 @@ class Worker {
 
         //try {
         Jedis redis = DatabaseConnection.getInstance().connectToRedis("redis");
+        System.err.println("Watching vote queue");
+
+        System.err.println("DEBUG ::: AVOIDING TABLE INITIALIZATION FOR THE BEHALF OF " +
+                "/docker-entrypoint-initdb.d/init.sql");
+
         //Connection dbConn = DatabaseConnection.getInstance().connectToDB();
-        if (!DatabaseConnection.getInstance().isTablesInitialized()){
+        /*if (!DatabaseConnection.getInstance().isTablesInitialized()){
             DatabaseConnection.getInstance().connect();
             DatabaseConnection.getInstance().close();
             System.err.println("DEBUG ::: TABLES INITIALIZED");
-        }
-        System.err.println("Watching vote queue");
+        }*/
         boolean exit = false;
         while (!exit) {
             // this is a blocking pop.
