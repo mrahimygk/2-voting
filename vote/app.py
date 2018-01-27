@@ -76,6 +76,8 @@ def hello():
     if request.method == 'POST':
         redis = get_redis()
         vote = request.form['vote']
+        id = vote.split("_")[1]
+        opponent = get_opponent(cursor, str(id))
         #print request.headers.get('User-Agent')
         #print request.access_route
         
@@ -94,6 +96,7 @@ def hello():
         hostname=hostname,
         votes=current_votes,
         vote=vote,
+        opponent=opponent
     ))
     resp.set_cookie('voter_id', voter_id)
     return resp
