@@ -100,7 +100,7 @@ CREATE OR REPLACE FUNCTION fetch_votes_for_voter(id TEXT)
     END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION fetch_opponent(id INTEGER)
+CREATE OR REPLACE FUNCTION fetch_opponent(_id INTEGER)
     RETURNS TABLE(
         id INTEGER,
         name VARCHAR(20),
