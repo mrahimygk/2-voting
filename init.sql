@@ -108,7 +108,7 @@ CREATE OR REPLACE FUNCTION fetch_opponent(_id INTEGER)
     BEGIN
         RETURN QUERY
             SELECT
-                id, name, opponent_id
+                candidate.id, candidate.name, candidate.opponent_id
             FROM
                 candidate
             WHERE opponent_id = $1;
