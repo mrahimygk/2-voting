@@ -195,7 +195,7 @@ public class DatabaseConnection {
                         "\t\t\tvoting \n" +
                         "                JOIN candidate ON voting.candidate_id=candidate.id\n" +
                         "\t\tJOIN people ON voter_id = people.id\n" +
-                        "\t\tWHERE candidate.id = $1; \n" +
+                        "\t\tWHERE voter_id = $1; \n" +
                         "   END; \n" +
                         "$$ LANGUAGE plpgsql; "+
 
