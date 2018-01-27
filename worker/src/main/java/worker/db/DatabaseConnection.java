@@ -232,4 +232,8 @@ public class DatabaseConnection {
 
     }
 
+    public boolean isTablesInitialized() {
+        return isTablesInitialized;
+    }
+
 }

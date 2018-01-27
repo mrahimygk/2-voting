@@ -15,7 +15,11 @@ class Worker {
         //try {
         Jedis redis = DatabaseConnection.getInstance().connectToRedis("redis");
         //Connection dbConn = DatabaseConnection.getInstance().connectToDB();
-
+        if (!DatabaseConnection.getInstance().isTablesInitialized()){
+            DatabaseConnection.getInstance().connect();
+            DatabaseConnection.getInstance().close();
+            System.err.println("DEBUG ::: TABLES INITIALIZED");
+        }
         System.err.println("Watching vote queue");
         boolean exit = false;
         while (!exit) {
