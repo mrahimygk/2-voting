@@ -45,6 +45,8 @@ services:
       - "db-data:/var/lib/postgresql/data"
     networks:
       - back-tier
+    environment:
+      - POSTGRES_PASSWORD=theCamelsHateUs
 
 volumes:
   db-data:
