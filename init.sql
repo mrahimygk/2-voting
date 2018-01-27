@@ -138,3 +138,11 @@ UPDATE candidate SET opponent_id=10 WHERE id=9;
 INSERT INTO candidate (name, opponent_id) values ('Pencil','11');
 INSERT INTO candidate (name, opponent_id) values ('Mechanical Pencil','11');
 UPDATE candidate SET opponent_id=12 WHERE id=11;
+
+INSERT INTO candidate (name, opponent_id) values ('Plain Chips','13');
+INSERT INTO candidate (name, opponent_id) values ('Flavoured Chips','13');
+UPDATE candidate SET opponent_id=14 WHERE id=13;
+
+INSERT INTO candidate (name, opponent_id) values ('WhiteBoard','15');
+INSERT INTO candidate (name, opponent_id) values ('BlackBoard','15');
+UPDATE candidate SET opponent_id=16 WHERE id=15;

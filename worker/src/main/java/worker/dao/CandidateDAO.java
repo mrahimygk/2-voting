@@ -167,21 +167,9 @@ public class CandidateDAO {
     public JSONArray getPollAsJsonArray(){
         JSONArray candidates = new JSONArray();
         try {
-            /*PreparedStatement statement = connection.getDatabaseConnection()
-                    .prepareStatement(
-                            "SELECT\n" +
-                                    "  candidate.name AS op1,\n" +
-                                    "  A.name AS op2\n" +
-                                    "FROM\n" +
-                                    "  `candidate` A\n" +
-                                    "JOIN\n" +
-                                    "  candidate\n" +
-                                    "WHERE\n" +
-                                    "  candidate.id = A.`opponent_id` AND candidate.id < A.id;"
-                    );*/
+
             CallableStatement statement = connection.getDatabaseConnection()
                     .prepareCall("{call fetch_candidates();}");
-
 
             ResultSet result = statement.executeQuery();
             while (result.next()) {
