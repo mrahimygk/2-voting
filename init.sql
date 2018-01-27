@@ -101,16 +101,18 @@ CREATE OR REPLACE FUNCTION fetch_votes_for_voter(id TEXT)
 $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION fetch_opponent(id INTEGER)
-RETURNS TABLE(id INTEGER, name VARCHAR(20), opponent_id INTEGER) AS $$
+    RETURNS TABLE(
+        id INTEGER,
+        name VARCHAR(20),
+        opponent_id INTEGER) AS $$
     BEGIN
-RETURN QUERY
-SELECT
-id, name, opponent_id
-FROM
-candidate
-
-WHERE opponent_id = $1;
-   END;
+        RETURN QUERY
+            SELECT
+                id, name, opponent_id
+            FROM
+                candidate
+            WHERE opponent_id = $1;
+    END;
 $$ LANGUAGE plpgsql;
 
 INSERT INTO candidate (name, opponent_id) values ('iOS','1');
