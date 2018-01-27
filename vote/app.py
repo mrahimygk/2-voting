@@ -46,6 +46,17 @@ def get_all_votes(cursor, _id):
         row = cursor.fetchone()
     return opts
 
+def get_opponent(cursor, _id):
+    sql = "SELECT * FROM fetch_opponent('{0}')".format(_id)
+    cursor.execute(sql)
+    row = cursor.fetchone()
+    
+    while row is not None:
+        opt = {'id':row[0], 'name':row[1] , 'opponent_id': row[2]}
+        
+        row = cursor.fetchone()
+    return opt
+
 # TODO: WE NEED TO add database key for these array
 name = 'name'
 _id = 'id'

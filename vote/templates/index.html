@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>This vs That!</title>
+    <title>Battle Of Tastes</title>
     <base href="/index.html">
     <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
     <meta name="keywords" content="docker-compose, docker, stack">
-    <meta name="author" content="Tutum dev team">
+    <meta name="author" content="mojtaba" >
     <link rel='stylesheet' href="{{ url_for('static',filename='stylesheets/style.css') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   </head>
@@ -35,19 +35,14 @@
     {% if vote %}
     <script>
       var vote = "{{vote}}";
+      var op = "{{opponent}}";
       console.log("vote = " + vote);
-      console.log("opponent = " + opponent);
+      console.log("opponent = " + op);
       
-      //if(vote == "a"){
-        $(".a").prop('disabled', true);
-        $(".a").html('{{option_a}} <i class="fa fa-check-circle"></i>');
-        $(".b").css('opacity','0.5');
-     // }
-      /*if(vote == "b"){
-        $(".b").prop('disabled', true);
-        $(".b").html('{{option_b}} <i class="fa fa-check-circle"></i>');
-        $(".a").css('opacity','0.5');
-      }*/
+        $("#"+vote).prop('disabled', true);
+        $("#"+vote).html('{{option_a}} <i class="fa fa-check-circle"></i>');
+        $("#candidate_"+op.id).css('opacity','0.5');
+     
     </script>
     {% endif %}
   </body>
