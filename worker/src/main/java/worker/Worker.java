@@ -4,7 +4,7 @@ import db.DatabaseConnection;
 import db.DatabaseUtils;
 import entity.People;
 import entity.Voting;
-import entity.Canditate;
+import entity.Candidate;
 import redis.clients.jedis.Jedis;
 import org.json.JSONObject;
 
