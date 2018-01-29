@@ -38,7 +38,8 @@
       var op = "{{opponent}}";
       console.log("vote = " + vote);
       console.log("opponent = " + op);
-      
+      console.log("votes = " + votes);
+            
         $("#"+vote).prop('disabled', true);
         $("#"+vote).html('{{option_a}} <i class="fa fa-check-circle"></i>');
         $("#candidate_"+op.id).css('opacity','0.5');
