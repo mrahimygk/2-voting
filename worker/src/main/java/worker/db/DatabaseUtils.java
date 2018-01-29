@@ -7,6 +7,8 @@ import entity.People;
 import entity.Candidate;
 import entity.Voting;
 
+import java.sql.SQLException;
+
 public class DatabaseUtils {
 
     private static DatabaseConnection connection = DatabaseConnection.getInstance();
@@ -56,8 +58,13 @@ public class DatabaseUtils {
     public Candidate getCandidateOpponent(Candidate candidate) {
         Candidate rCandidate = null;
         if (connection.connect()) {
-            rCandidate = CandidateDAO.getInstance(connection).getOpponent(candidate, candidate.getOpponent().getId());
-            connection.close();
+            try {
+                rCandidate = CandidateDAO.getInstance(connection).getOpponent(candidate, candidate.getOpponent().getId());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                connection.close();
+            }
         }
 
         return rCandidate;

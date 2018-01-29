@@ -52,7 +52,7 @@ class Worker {
                     voterId, "", userAgent, userAddress,
                     port, "", lastVisit, null);
 
-            DatabaseUtils.getInstance().getPeople(people);
+            //todo: DatabaseUtils.getInstance().getPeople(people);
 
             Voting voting = new Voting("", people, candidate, "",
                     new Date().toString(), 0);
