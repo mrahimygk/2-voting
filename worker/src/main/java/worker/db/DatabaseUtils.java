@@ -39,5 +39,27 @@ public class DatabaseUtils {
     public boolean insertVoting(Voting voting) {
 
         return VotingDAO.getInstance(connection).insert(voting);
+
+    }
+
+    public Candidate getCandidate(String candidateID) {
+
+        Candidate candidate = null;
+        if (connection.connect()) {
+            candidate = CandidateDAO.getInstance(connection).get(candidateID);
+            connection.close();
+        }
+
+        return candidate;
+    }
+
+    public Candidate getCandidateOpponent(Candidate candidate) {
+        Candidate rCandidate = null;
+        if (connection.connect()) {
+            rCandidate = CandidateDAO.getInstance(connection).getOpponent(candidate, candidate.getOpponent().getId());
+            connection.close();
+        }
+
+        return rCandidate;
     }
 }

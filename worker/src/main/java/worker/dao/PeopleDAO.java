@@ -132,6 +132,9 @@ public class PeopleDAO {
             statement.setString(i++, people.getId());
 
             statement.executeUpdate();
+
+            // todo: update voting list?
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
