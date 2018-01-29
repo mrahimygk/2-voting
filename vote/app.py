@@ -83,7 +83,7 @@ def hello():
     vote = None
     cursor = init_db();
     options = get_all_options(cursor)
-    current_votes = get_all_votes(cursor, str(voter_id))
+    votes = get_all_votes(cursor, str(voter_id))
     opponent = "0"
     if request.method == 'POST':
         redis = get_redis()
@@ -106,7 +106,7 @@ def hello():
         'index.html',
         options=options,
         hostname=hostname,
-        votes=current_votes,
+        votes=votes,
         vote=vote,
         opponent=opponent
     ))
