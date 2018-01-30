@@ -9,6 +9,7 @@ import redis.clients.jedis.Jedis;
 import org.json.JSONObject;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 class Worker {
@@ -41,7 +42,7 @@ class Worker {
 
             People people = new People(
                     voterId, "", userAgent, userAddress,
-                    port, "", lastVisit, null);
+                    port, "", lastVisit, new ArrayList<Voting>());
 
             DatabaseUtils.getInstance().fillPeople(people);
 
