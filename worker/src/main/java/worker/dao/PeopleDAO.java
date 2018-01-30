@@ -234,7 +234,7 @@ public class PeopleDAO {
 
             statement.setString(1, people.getId());
             ResultSet result = statement.executeQuery();
-            while (result.next()) {
+            if (result.next()) {
                 int i = 1;
                 i++; // ID
                 people.setFullName(result.getString(i++)); // full name
@@ -245,7 +245,6 @@ public class PeopleDAO {
                 i++; // last visit
 
                 people.setVoteList(VotingDAO.getInstance(connection).getAllForPeople(people.getId()));
-
                 return true;
             }
         } catch (SQLException e) {

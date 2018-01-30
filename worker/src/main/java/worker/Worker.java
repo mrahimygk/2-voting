@@ -44,10 +44,19 @@ class Worker {
                     voterId, "", userAgent, userAddress,
                     port, "", lastVisit, new ArrayList<Voting>());
 
-            DatabaseUtils.getInstance().fillPeople(people);
+            if(!DatabaseUtils.getInstance().fillPeople(people)){
+                // not filled:
+                people.setFullName("New Comer");
+                people.setFirstVisit(people.getLastVisit());
+            }
 
             Voting voting = new Voting("", people, candidate, "",
                     new Date().toString(), 0);
+            if(!DatabaseUtils.getInstance().fillVoting(voting)){
+                //todo: fill voting from this data
+                // id comes from SERIAL
+                voting.setFirstVoted(voting.getLastChange());
+            }
 
             people.getVoteList().add(voting);
 

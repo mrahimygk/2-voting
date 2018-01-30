@@ -260,6 +260,35 @@ public class VotingDAO {
         return votingList;
     }
 
+    public boolean get(Voting voting) {
+        try {
+            PreparedStatement statement = connection.getDatabaseConnection()
+                    .prepareStatement(
+                            "SELECT * FROM voting WHERE voter_id=? AND candidate_id=?; "
+                    );
+
+            statement.setString(1, voting.getVoter().getId());
+            statement.setInt(1, Integer.parseInt(voting.getCandidate().getId()));
+
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                int i = 1;
+                voting.setId(String.valueOf(result.getInt(i++)));
+                i++; // people
+                i++; // candidate
+
+                voting.setFirstVoted(result.getString(i++)); // first voted
+                i++; // lastChange
+                voting.setChangesCount(result.getInt(i++));
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     public Voting get(String id) {
         Voting voting = null;
         try {

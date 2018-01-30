@@ -81,4 +81,13 @@ public class DatabaseUtils {
         return isFilled;
     }
 
+    public boolean fillVoting(Voting voting) {
+        boolean isFilled = false;
+        if (connection.connect()) {
+            isFilled = VotingDAO.getInstance(connection).get(voting);
+            connection.close();
+        }
+
+        return isFilled;
+    }
 }
