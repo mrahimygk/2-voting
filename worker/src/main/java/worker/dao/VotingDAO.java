@@ -57,7 +57,7 @@ public class VotingDAO {
                 String date = LocalDate.now().toString();
                 int i = 1;
                 statement.setString(i++, date);
-                statement.setString(i++, voting.getId());
+                statement.setInt(i++, Integer.parseInt(voting.getId()));
 
                 statement.executeUpdate();
                 return true;
@@ -87,7 +87,7 @@ public class VotingDAO {
                 int i = 1;
                 statement.setString(i++, voting.getCandidate().getId());
                 statement.setString(i++, date);
-                statement.setString(i++, voting.getId());
+                statement.setInt(i++, Integer.parseInt(voting.getId()));
                 statement.executeUpdate();
                 return true;
             } catch (SQLException e) {
@@ -114,7 +114,7 @@ public class VotingDAO {
             String date = LocalDate.now().toString();
             int i = 1;
             statement.setString(i++, people.getId());
-            statement.setString(i++, candidate.getId());
+            statement.setInt(i++, Integer.parseInt(candidate.getId()));
             statement.setString(i++, date);
             statement.setString(i++, date);
 
@@ -141,7 +141,7 @@ public class VotingDAO {
                             "DELETE FROM voting WHERE id=?; "
                     );
 
-            statement.setString(1, voting.getId());
+            statement.setInt(1, Integer.parseInt(voting.getId()));
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -172,11 +172,11 @@ public class VotingDAO {
 
             int i = 1;
             statement.setString(i++, voting.getVoter().getId());
-            statement.setString(i++, voting.getCandidate().getId());
+            statement.setInt(i++, Integer.parseInt(voting.getCandidate().getId()));
             statement.setString(i++, voting.getFirstVoted());
             statement.setString(i++, voting.getLastChange());
             statement.setInt(i++, voting.getChangesCount());
-            statement.setString(i++, voting.getId());
+            statement.setInt(i++, Integer.parseInt(voting.getId()));
 
             statement.executeUpdate();
 
@@ -206,7 +206,7 @@ public class VotingDAO {
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 int i = 1;
-                String id = result.getString(i++);
+                String id = String.valueOf(result.getInt(i++));
                 Voting voting = new Voting(
                         id,
                         PeopleDAO.getInstance(connection).get(result.getString(i++)),
@@ -240,7 +240,7 @@ public class VotingDAO {
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 int i = 1;
-                String id = result.getString(i++);
+                String id = String.valueOf(result.getInt(i++));
                 Voting voting = new Voting(
                         id,
                         PeopleDAO.getInstance(connection).get(result.getString(i++)),
@@ -268,7 +268,7 @@ public class VotingDAO {
                             "SELECT * FROM voting WHERE id=?; "
                     );
 
-            statement.setString(1, id);
+            statement.setInt(1, Integer.parseInt(id));
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 int i = 1;

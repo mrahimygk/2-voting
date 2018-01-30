@@ -3,6 +3,7 @@ package dao;
 import db.DatabaseConnection;
 import entity.Candidate;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -44,7 +45,7 @@ public class CandidateDAO {
 
             int i = 1;
             statement.setString(i++, candidate.getName());
-            statement.setString(i++, candidate.getOpponent().getId());
+            statement.setInt(i++, Integer.parseInt(candidate.getOpponent().getId()));
 
             statement.executeUpdate();
             return true;
@@ -63,7 +64,7 @@ public class CandidateDAO {
                     );
 
             int i = 1;
-            statement.setString(i++, candidate.getId());
+            statement.setInt(i++, Integer.parseInt(candidate.getId()));
 
             statement.executeUpdate();
             return true;
@@ -92,7 +93,7 @@ public class CandidateDAO {
                 int i = 1;
 
                 Candidate candidate = new Candidate(
-                        result.getString(i++),
+                        String.valueOf(result.getInt(i++)),
                         result.getString(i++),
                         null
                 );
@@ -118,12 +119,12 @@ public class CandidateDAO {
                         "SELECT * FROM candidate WHERE id=?; "
                 );
 
-        statement.setString(1, opID);
+        statement.setInt(1, Integer.parseInt(opID));
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             int j = 1;
             opponent = new Candidate(
-                    resultSet.getString(j++),
+                    String.valueOf(resultSet.getInt(j++)),
                     resultSet.getString(j++),
                     candidate
             );
@@ -140,7 +141,7 @@ public class CandidateDAO {
                             "SELECT * FROM candidate WHERE id = ?; "
                     );
 
-            statement.setString(1, id);
+            statement.setInt(1, Integer.parseInt(id));
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 int i = 1;
@@ -171,14 +172,22 @@ public class CandidateDAO {
             CallableStatement statement = connection.getDatabaseConnection()
                     .prepareCall("{call fetch_candidates();}");
 
+//            opt = [{'id':row[0], 'name':row[1]}, { 'id': row[2] , 'name':row[3] }]
+
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 int i = 1;
                 JSONArray array = new JSONArray();
-                array.put(result.getString(i++));
-                array.put(result.getString(i++));
 
-                // opponent ID
+                JSONObject object1 = new JSONObject();
+                object1.put("id", result.getInt(i++) );
+                object1.put("name", result.getString(i++) );
+                JSONObject object2 = new JSONObject();
+                object2.put("id", result.getInt(i++) );
+                object2.put("name", result.getString(i++) );
+
+                array.put(object1);
+                array.put(object2);
                 candidates.put(array);
             }
         } catch (

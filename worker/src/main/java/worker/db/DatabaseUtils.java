@@ -22,7 +22,8 @@ public class DatabaseUtils {
     }
 
     public boolean insertPeople(People people) {
-        System.err.printf("MY_DEBUG (%s.java) : inserting people with id= %s\n", getClass().getSimpleName(), people.getId());
+        System.err.printf("MY_DEBUG (%s.java) : inserting people with id= %s\n", getClass().getSimpleName(),
+                people.getId());
         boolean success = false;
         if (connection.connect()) {
             success = PeopleDAO.getInstance(connection).insert(people);
