@@ -6,22 +6,22 @@ CREATE TABLE IF NOT EXISTS  people (
     id VARCHAR(36) PRIMARY KEY NOT NULL,
     full_name VARCHAR(50)  DEFAULT NULL,
     user_agent VARCHAR(255) DEFAULT NULL,
-    remote_address VARCHAR(20) DEFAULT NULL,
+    remote_address VARCHAR(50) DEFAULT NULL,
     remote_port VARCHAR(4) DEFAULT NULL,
-    first_visit VARCHAR(20) DEFAULT NULL,
-    last_visit VARCHAR(20) DEFAULT NULL) ;
+    first_visit VARCHAR(50) DEFAULT NULL,
+    last_visit VARCHAR(50) DEFAULT NULL) ;
 
 CREATE TABLE IF NOT EXISTS  voting (
     id SERIAL PRIMARY KEY  NOT NULL,
     voter_id VARCHAR(36)  NOT NULL,
     candidate_id INT  NOT NULL,
-    first_voted VARCHAR(20) DEFAULT NULL,
-    last_change VARCHAR(20) DEFAULT NULL,
+    first_voted VARCHAR(50) DEFAULT NULL,
+    last_change VARCHAR(50) DEFAULT NULL,
     changes_count INT DEFAULT 1) ;
 
 CREATE TABLE IF NOT EXISTS candidate (
     id SERIAL PRIMARY KEY  NOT NULL,
-    name VARCHAR(20)  NOT NULL,
+    name VARCHAR(50)  NOT NULL,
     opponent_id INT  NOT NULL) ;
 
 DO $$BEGIN  BEGIN
@@ -55,9 +55,9 @@ END $$;
 CREATE OR REPLACE FUNCTION fetch_candidates()
     RETURNS TABLE(
         op1ID INTEGER,
-        op1Name VARCHAR(20),
+        op1Name VARCHAR(50),
         op2ID INTEGER,
-        op2Name VARCHAR(20)) AS $$
+        op2Name VARCHAR(50)) AS $$
     BEGIN
         RETURN QUERY
             SELECT
@@ -79,8 +79,8 @@ CREATE OR REPLACE FUNCTION fetch_votes_for_voter(id TEXT)
         voterID VARCHAR(36),
         voterName VARCHAR(36),
         candidateID INTEGER,
-        firstVoted VARCHAR(20),
-        lastChange VARCHAR(20) ,
+        firstVoted VARCHAR(50),
+        lastChange VARCHAR(50) ,
         changesCount INTEGER) AS $$
     BEGIN
         RETURN QUERY
@@ -103,7 +103,7 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION fetch_opponent(_id INTEGER)
     RETURNS TABLE(
         id INTEGER,
-        name VARCHAR(20),
+        name VARCHAR(50),
         opponent_id INTEGER) AS $$
     BEGIN
         RETURN QUERY
