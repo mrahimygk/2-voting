@@ -79,9 +79,17 @@ def hello():
     if not voter_id:
         voter_id = hex(random.getrandbits(64))[2:-1]
     #todo: fetch all votes from this person and make a response
-
     vote = None
     cursor = init_db();
+    # test : if this app gets the correct data?
+    cursor.execute("SELECT * FROM voting");
+    row = cursor.fetchone()
+    
+    while row is not None:
+        opt = {'id':row[0], 'name':row[1] , 'opponent_id': row[2]}
+        print "DEBUG ::: There are votings in db : {0}".format()
+        row = cursor.fetchone()
+    
     options = get_all_options(cursor)
     votes = get_all_votes(cursor, str(voter_id))
     opponent = "0"
