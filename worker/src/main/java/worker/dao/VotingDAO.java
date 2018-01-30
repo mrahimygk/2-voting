@@ -44,7 +44,7 @@ public class VotingDAO {
         Candidate candidate = voting.getCandidate();
 
         // Already voted for this ... no need to change?
-        if (PeopleDAO.getInstance(connection).hasVoted(people, candidate.getId(), true)) {
+        if (PeopleDAO.getInstance(connection).hasVoted(voting, people, candidate.getId(), true)) {
             try {
                 PreparedStatement statement = connection.getDatabaseConnection()
                         .prepareStatement(
@@ -67,7 +67,7 @@ public class VotingDAO {
             return false;
         }
 
-        if (PeopleDAO.getInstance(connection).hasVotedToOpponent(people, candidate, true)) {
+        if (PeopleDAO.getInstance(connection).hasVotedToOpponent(voting, people, candidate, true)) {
             // TODO: change vote and set opponent
 
             voting.setCandidate(candidate.getOpponent());
@@ -130,6 +130,7 @@ public class VotingDAO {
     /**
      * remove a voting from database
      * checks for keys?
+     *
      * @param voting
      * @return
      */

@@ -224,6 +224,37 @@ public class PeopleDAO {
         return people;
     }
 
+    public boolean get(People people) {
+
+        try {
+            PreparedStatement statement = connection.getDatabaseConnection()
+                    .prepareStatement(
+                            "SELECT * FROM people WHERE id = ?; "
+                    );
+
+            statement.setString(1, people.getId());
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int i = 1;
+                i++; // ID
+                people.setFullName(result.getString(i++)); // full name
+                i++; // UserAgent
+                i++; // remote address
+                i++; // remote port
+                people.setFirstVisit(result.getString(i++));
+                i++; // last visit
+
+                people.setVoteList(VotingDAO.getInstance(connection).getAllForPeople(people.getId()));
+
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     /**
      * count all site visitors
      *
@@ -290,13 +321,14 @@ public class PeopleDAO {
      * @param candidateID
      * @return
      */
-    public boolean hasVoted(People people, String candidateID, boolean fresh) {
+    public boolean hasVoted(Voting inputVoting, People people, String candidateID, boolean fresh) {
         if (fresh)
             people.setVoteList(VotingDAO.getInstance(connection)
                     .getAllForPeople(people.getId()));
 
         for (Voting voting : people.getVoteList()) {
             if (voting.getId().equals(candidateID)) {
+                inputVoting.setId(voting.getId());
                 return true;
             }
         }
@@ -311,7 +343,7 @@ public class PeopleDAO {
      * @param candidate
      * @return
      */
-    public boolean hasVotedToOpponent(People people, Candidate candidate, boolean fresh) {
+    public boolean hasVotedToOpponent(Voting inputVoting, People people, Candidate candidate, boolean fresh) {
 
         if (fresh)
             people.setVoteList(VotingDAO.getInstance(connection)
@@ -319,6 +351,7 @@ public class PeopleDAO {
 
         for (Voting voting : people.getVoteList()) {
             if (voting.getId().equals(candidate.getOpponent().getId())) {
+                inputVoting.setId(voting.getId());
                 return true;
             }
         }

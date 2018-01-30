@@ -34,7 +34,7 @@ public class DatabaseUtils {
 
     }
 
-    public boolean insertVote(Candidate candidate) {
+    public boolean insertCandidate(Candidate candidate) {
         return CandidateDAO.getInstance(connection).insert(candidate);
     }
 
@@ -69,4 +69,15 @@ public class DatabaseUtils {
 
         return rCandidate;
     }
+
+    public boolean fillPeople(People people) {
+        boolean isFilled = false;
+        if (connection.connect()) {
+            isFilled = PeopleDAO.getInstance(connection).get(people);
+            connection.close();
+        }
+
+        return isFilled;
+    }
+
 }

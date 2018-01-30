@@ -9,9 +9,6 @@ import redis.clients.jedis.Jedis;
 import org.json.JSONObject;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
 
 class Worker {
@@ -25,12 +22,6 @@ class Worker {
         System.err.println("DEBUG ::: AVOIDING TABLE INITIALIZATION FOR THE BEHALF OF " +
                 "/docker-entrypoint-initdb.d/init.sql");
 
-        //Connection dbConn = DatabaseConnection.getInstance().connectToDB();
-        /*if (!DatabaseConnection.getInstance().isTablesInitialized()){
-            DatabaseConnection.getInstance().connect();
-            DatabaseConnection.getInstance().close();
-            System.err.println("DEBUG ::: TABLES INITIALIZED");
-        }*/
         boolean exit = false;
         while (!exit) {
             // this is a blocking pop.
@@ -52,18 +43,19 @@ class Worker {
                     voterId, "", userAgent, userAddress,
                     port, "", lastVisit, null);
 
-            //todo: DatabaseUtils.getInstance().getPeople(people);
+            DatabaseUtils.getInstance().fillPeople(people);
 
             Voting voting = new Voting("", people, candidate, "",
                     new Date().toString(), 0);
 
-            List<Voting> votingList = new ArrayList<>();
-            votingList.add(voting);
-            people.setVoteList(votingList);
+            people.getVoteList().add(voting);
 
             if (DatabaseUtils.getInstance().insertPeople(people)) {
-                System.err.printf("Insert people (id= %s) is done ", people.getId());
+                System.err.printf("Insert people (id= %s) is done ", people.getId()); // یا درج میشه یا آپدیت
                 // TODO: INSERT vote
+                if (DatabaseUtils.getInstance().insertVoting(voting)){
+                    System.err.printf("Insert Voting (id= %s) is done ", voting.getId());
+                }
             }
         }
     }
