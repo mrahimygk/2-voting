@@ -42,7 +42,7 @@ public class DatabaseUtils {
     public boolean insertVoting(Voting voting) {
 
         boolean s = false;
-        if (connection.open()) {
+        if (connection.connect()) {
 
             s = VotingDAO.getInstance(connection).insert(voting);
             connection.close();
