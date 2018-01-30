@@ -267,9 +267,9 @@ public class VotingDAO {
                             "SELECT * FROM voting WHERE voter_id=? AND candidate_id=?; "
                     );
 
-            int i=1;
-            statement.setString(i++, voting.getVoter().getId());
-            statement.setInt(i++, Integer.parseInt(voting.getCandidate().getId()));
+            int k=1;
+            statement.setString(k++, voting.getVoter().getId());
+            statement.setInt(k++, Integer.parseInt(voting.getCandidate().getId()));
 
             ResultSet result = statement.executeQuery();
             if (result.next()) {
