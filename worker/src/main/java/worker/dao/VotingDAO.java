@@ -268,7 +268,7 @@ public class VotingDAO {
                     );
 
             statement.setString(1, voting.getVoter().getId());
-            statement.setInt(1, Integer.parseInt(voting.getCandidate().getId()));
+            statement.setInt(2, Integer.parseInt(voting.getCandidate().getId()));
 
             ResultSet result = statement.executeQuery();
             if (result.next()) {
