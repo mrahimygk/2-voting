@@ -85,7 +85,7 @@ public class VotingDAO {
 
                 String date = LocalDate.now().toString();
                 int i = 1;
-                statement.setString(i++, voting.getCandidate().getId());
+                statement.setInt(i++, Integer.parseInt(voting.getCandidate().getId()));
                 statement.setString(i++, date);
                 statement.setInt(i++, Integer.parseInt(voting.getId()));
                 statement.executeUpdate();
@@ -166,7 +166,7 @@ public class VotingDAO {
                                     "candidate_id=? ," +
                                     "first_voted=? ," +
                                     "last_change=? ," +
-                                    "changes_count=? ," +
+                                    "changes_count=? " +
                                     "WHERE id = ?;"
                     );
 
