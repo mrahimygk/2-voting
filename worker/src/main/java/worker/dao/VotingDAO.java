@@ -304,7 +304,7 @@ public class VotingDAO {
                 int i = 1;
                 voting = new Voting(
                         id,
-                        PeopleDAO.getInstance(connection).get(result.getString(i++)),
+                        PeopleDAO.getInstance(connection).get(false, result.getString(i++)),
                         CandidateDAO.getInstance(connection).get(result.getString(i++)),
                         result.getString(i++),
                         result.getString(i++),
