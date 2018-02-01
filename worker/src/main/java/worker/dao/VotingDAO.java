@@ -78,7 +78,7 @@ public class VotingDAO {
                         .prepareStatement(
                                 "UPDATE voting SET " +
                                         "candidate_id = ? , " +
-                                        "last_change = ? " +
+                                        "last_change = ? , " +
                                         "changes_count=changes_count+1 " +
                                         "WHERE id = ?;"
                         );
