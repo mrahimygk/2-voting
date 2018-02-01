@@ -190,7 +190,7 @@ public class PeopleDAO {
      * @param id
      * @return
      */
-    public People get(String id) {
+    public People get(boolean fetch, String id) {
         People people = null;
 
         try {
@@ -214,7 +214,8 @@ public class PeopleDAO {
                         null
                 );
 
-                people.setVoteList(VotingDAO.getInstance(connection).getAllForPeople(id));
+                if (fetch)
+                    people.setVoteList(VotingDAO.getInstance(connection).getAllForPeople(id));
 
             }
         } catch (SQLException e) {

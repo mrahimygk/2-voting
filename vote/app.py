@@ -86,7 +86,7 @@ def hello():
     row = cursor.fetchone()
     
     while row is not None:
-        opt = {'id':row[0], 'name':row[1] , 'opponent_id': row[2]}
+        opt = {'id':row[0], 'voter':row[1] , 'candidate': row[2], 'fv':row[3], 'lc':row[4], 'c':row[5]}
         print "DEBUG ::: There are votings in db : {0}".format(opt)
         row = cursor.fetchone()
     

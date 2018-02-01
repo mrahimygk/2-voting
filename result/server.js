@@ -43,7 +43,7 @@ async.retry(
 
 // TODO: fetch with a call query. pass data to the view
 function getVotes(client) {
-  client.query('SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote', [], function(err, result) {
+  client.query('SELECT candidate_id, COUNT(candidate_id) AS count FROM voting GROUP BY candidate_id;', [], function(err, result) {
     if (err) {
       console.error("Error performing query: " + err);
     } else {

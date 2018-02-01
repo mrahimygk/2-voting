@@ -209,7 +209,7 @@ public class VotingDAO {
                 String id = String.valueOf(result.getInt(i++));
                 Voting voting = new Voting(
                         id,
-                        PeopleDAO.getInstance(connection).get(result.getString(i++)),
+                        PeopleDAO.getInstance(connection).get(false, result.getString(i++)),
                         CandidateDAO.getInstance(connection).get(result.getString(i++)),
                         result.getString(i++),
                         result.getString(i++),
@@ -243,7 +243,7 @@ public class VotingDAO {
                 String id = String.valueOf(result.getInt(i++));
                 Voting voting = new Voting(
                         id,
-                        PeopleDAO.getInstance(connection).get(result.getString(i++)),
+                        PeopleDAO.getInstance(connection).get(false, result.getString(i++)),
                         CandidateDAO.getInstance(connection).get(result.getString(i++)),
                         result.getString(i++),
                         result.getString(i++),
@@ -267,7 +267,7 @@ public class VotingDAO {
                             "SELECT * FROM voting WHERE voter_id=? AND candidate_id=?; "
                     );
 
-            int k=1;
+            int k = 1;
             statement.setString(k++, voting.getVoter().getId());
             statement.setInt(k++, Integer.parseInt(voting.getCandidate().getId()));
 
