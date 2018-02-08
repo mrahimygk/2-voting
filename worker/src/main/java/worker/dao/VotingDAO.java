@@ -49,7 +49,7 @@ public class VotingDAO {
                 PreparedStatement statement = connection.getDatabaseConnection()
                         .prepareStatement(
                                 "UPDATE voting SET " +
-                                        "last_change = ? " +
+                                        "last_change = ? ," +
                                         "changes_count=changes_count+1 " +
                                         "WHERE id = ?;"
                         );
