@@ -45,6 +45,7 @@ public class VotingDAO {
 
         // Already voted for this ... no need to change?
         if (PeopleDAO.getInstance(connection).hasVoted(voting, people, candidate.getId(), true)) {
+            System.err.printf("(VotingDAO) : %s has already voted to %s\n", people.getId(), candidate.getId());
             try {
                 PreparedStatement statement = connection.getDatabaseConnection()
                         .prepareStatement(
