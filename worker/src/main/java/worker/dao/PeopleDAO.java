@@ -134,6 +134,11 @@ public class PeopleDAO {
             statement.executeUpdate();
 
             // todo: update voting list?
+            if (people.getVoteList() != null) {
+                for (Voting voting : people.getVoteList()) {
+                    VotingDAO.getInstance(connection).insert(voting);
+                }
+            }
 
             return true;
         } catch (SQLException e) {
