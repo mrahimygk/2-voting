@@ -96,8 +96,8 @@ def hello():
     if request.method == 'POST':
         redis = get_redis()
         vote = request.form['vote']
-        id = vote.split("_")[1]
-        opponent = get_opponent(cursor, str(id))
+        _id = vote.split("_")[1]
+        opponent = get_opponent(cursor, str(_id))
         #print request.headers.get('User-Agent')
         #print request.access_route
         
@@ -107,7 +107,7 @@ def hello():
         
         print "DEBUG ::: received vote : " + vote
         # todo: add other elements here
-        data = json.dumps({'voter_id': voter_id, 'vote': id, 'user_agent':request.headers.get('User-Agent'), 'user_address':request.remote_addr, 'port':'80', 'last_visit':str(datetime.datetime.now())})
+        data = json.dumps({'voter_id': voter_id, 'vote': _id, 'user_agent':request.headers.get('User-Agent'), 'user_address':request.remote_addr, 'port':'80', 'last_visit':str(datetime.datetime.now())})
         redis.rpush('votes', data)
 
     resp = make_response(render_template(

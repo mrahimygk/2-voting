@@ -20,9 +20,6 @@ class Worker {
         Jedis redis = DatabaseConnection.getInstance().connectToRedis("redis");
         System.err.println("Watching vote queue");
 
-        System.err.println("DEBUG ::: AVOIDING TABLE INITIALIZATION FOR THE BEHALF OF " +
-                "/docker-entrypoint-initdb.d/init.sql");
-
         boolean exit = false;
         while (!exit) {
             // this is a blocking pop.
