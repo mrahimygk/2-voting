@@ -30,12 +30,12 @@ def get_all_options(cursor):
     opts = []
     while row is not None:
         opt = [{'id':row[0], 'name':row[1]}, { 'id': row[2] , 'name':row[3] }]
-        print "opt: {0} " .format(opt)
         opts.append(opt)
         row = cursor.fetchone()
     return opts
 
 def get_all_votes(cursor, _id):
+    print "get all votes for '{0}' ".format(_id)
     sql = "SELECT * FROM fetch_votes_for_voter('{0}')".format(_id)
     cursor.execute(sql)
     row = cursor.fetchone()
@@ -43,6 +43,7 @@ def get_all_votes(cursor, _id):
     while row is not None:
         opt = [{'vid':row[0], 'voter_id':row[1] , 'voter_name': row[2] , 'candidate_id':row[3], 'first_voted':row[4],  'last_change':row[5],  'change_count':row[6]    }]
         opts.append(opt)
+        print "getAllVotes:  My Votes are '{0}'".format(opt)
         row = cursor.fetchone()
     return opts
 
